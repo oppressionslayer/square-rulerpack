@@ -1,0 +1,75 @@
+# Build square-rulerpack-native wheels for every platform with maturin, and the sdist.
+# Download the artifacts and `twine upload` them, or wire `pypa/gh-action-pypi-publish` to a tag.
+name: native wheels
+
+on:
+  push:
+    tags: ["native-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        target: [x86_64, aarch64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PyO3/maturin-action@v1
+        with:
+          working-directory: native
+          target: ${{ matrix.target }}
+          manylinux: "2014"
+          args: --release --out dist --features pyo3/extension-module
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-linux-${{ matrix.target }}
+          path: native/dist
+
+  macos:
+    runs-on: macos-14
+    strategy:
+      matrix:
+        target: [x86_64, aarch64]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PyO3/maturin-action@v1
+        with:
+          working-directory: native
+          target: ${{ matrix.target }}
+          args: --release --out dist --features pyo3/extension-module
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-macos-${{ matrix.target }}
+          path: native/dist
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PyO3/maturin-action@v1
+        with:
+          working-directory: native
+          target: x64
+          args: --release --out dist --features pyo3/extension-module
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wheels-windows-x64
+          path: native/dist
+
+  sdist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: PyO3/maturin-action@v1
+        with:
+          working-directory: native
+          command: sdist
+          args: --out dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sdist
+          path: native/dist
