@@ -11,6 +11,13 @@ numpy slices otherwise; relation collection runs across processes.
 
 ```sh
 pip install square-rulerpack            # from PyPI; add '[fast]' for the numba kernel
+
+or
+
+pip install square-rulerpack[native]
+
+or
+
 pip install -e .                        # or from this checkout
 python -m square_rulerpack 1009732533765211 --workers 8
 ```
