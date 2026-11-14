@@ -9,6 +9,21 @@ same Gray-code polynomial switching, same Q1/Q2 forms, same exact and plain thre
 large-prime cycle finder and square root. The sieve kernel is numba when it is installed and
 numpy slices otherwise; relation collection runs across processes. Very fast. 
 
+## Install
+
+If pip finds no wheel for your platform it builds `square-rulerpack-native` from the source tarball, which
+needs a Rust toolchain (two or three minutes, done once). Install Rust first, then open a new terminal:
+
+```sh
+curl https://sh.rustup.rs -sSf | sh          # macOS, Linux, WSL
+# Windows: download and run rustup-init.exe from https://rustup.rs
+pip install 'square-rulerpack[native]'
+```
+
+Building from source on purpose (`pip install square-rulerpack-native --no-binary :all:` or
+`maturin develop --release` in `native/`) needs the same toolchain; `.github/workflows/native-wheels.yml`
+builds the Linux, macOS and Windows wheels.
+
 ```sh
 pip install square-rulerpack            # from PyPI; add '[fast]' for the numba kernel
 
@@ -234,18 +249,7 @@ size of the *smaller factor*; the sieve's grows with the size of *n* and does no
 factors are split. For balanced semiprimes above 40 digits the difference is minutes versus
 fractions of a second.
 
-If pip finds no wheel for your platform it builds `square-rulerpack-native` from the source tarball, which
-needs a Rust toolchain (two or three minutes, done once). Install Rust first, then open a new terminal:
-
-```sh
-curl https://sh.rustup.rs -sSf | sh          # macOS, Linux, WSL
-# Windows: download and run rustup-init.exe from https://rustup.rs
-pip install 'square-rulerpack[native]'
-```
-
-Building from source on purpose (`pip install square-rulerpack-native --no-binary :all:` or
-`maturin develop --release` in `native/`) needs the same toolchain; `.github/workflows/native-wheels.yml`
-builds the Linux, macOS and Windows wheels.
+No wheel for your platform? See **Install** at the top: pip builds the extension from source once Rust is installed.
 
 ## Speed
 
