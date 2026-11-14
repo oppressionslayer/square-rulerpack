@@ -28,16 +28,19 @@ python -m square_rulerpack 1009732533765211 --workers 8
 ```
 
 ```
- To use with sympy you can do this simple code:
+ # To use with sympy you can do this simple code:
 
 import square_rulerpack as sq
 from sympy import factor_cache, factorint
 
 # Route numbers > 40 digits straight to the Rust SIQS engine
-factor_cache.get_external = lambda self, n: sq.factor_completely(n, workers=8) if n > 10**40 else None
+factor_cache.get_external = lambda n: sq.factor_completely(n, workers=8) if n > 10**40 else None
 
 # Now SymPy natively uses your Rust extension for large semiprimes!
 print(factorint(50726044447758565750355444206008211963939957754977146054012847169421070122136537))
+# 8122445387892243915736861382463382759631: 1, 6245169037808927489391096084448856781527: 1}
+
+
 ```
 ## Factor a number
 
