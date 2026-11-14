@@ -169,12 +169,18 @@ does not stop a running sieve (the engine has no cancel hook).
 
 Measured on an i9-11900H (8 cores), 8 threads, quiet machine:
 
+
+sample 80 digit: 50726044447758565750355444206008211963939957754977146054012847169421070122136537
+sample 60 digit: 100433627766186892221372630609062766858404681029709092356097
+
 | input | Rust extension | this Python port | `sympy.factorint` |
 |---|---|---|---|
-| 80-digit semiprime 5072…6537 (from an IPython session) | **15.5 s** | hours | not attempted |
+| 80-digit semiprime 5072…6537 (from an IPython session) | **15.5 s** | an hour-ish | not attempted |
 | 40-digit semiprime, two random 20-digit primes | 0.01 s | 0.27 s | 7.8 s |
 | 50-digit semiprime, two random 25-digit primes | 0.06 s | 0.33 s | 8.8 s |
 | 60-digit semiprime, two random 30-digit primes | 0.80 s | 14.8 s | 116.6 s |
+
+using the workers=1 acheive theabove results, the 80 digit cna be down in 19  minutes with more workers.
 
 `sympy.factorint` has Pollard rho, p−1 and ECM but no quadratic sieve, so its time grows with the
 size of the *smaller factor*; the sieve's grows with the size of *n* and does not care how the
