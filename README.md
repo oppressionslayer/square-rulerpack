@@ -14,7 +14,7 @@ pip install square-rulerpack            # from PyPI; add '[fast]' for the numba 
 
 or
 
-pip install square-rulerpack[native]
+pip install square-rulerpack[native]   # For the Rust compiled version, very faster
 
 or
 
