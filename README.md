@@ -61,8 +61,8 @@ session on a 40-digit number; `examples_walkthrough.py` reproduces it.
 
 ```python
 import square_rulerpack as sq
-w = sq.Walkthrough(5857505067604849028619727330686829482307, workers=4)
-
+w = sq.Walkthrough(5857505067604849028619727330686829482307, workers=4)  # python only implementation not the fatest, but it will factor
+#  sq.factor_completely(a, workers=8, verbose=True) is way faster, it uses the rust engine and will factor a 100 digit number in 12 minutes dependent on your machine
 w.summary()          # digits, bits, trial division, square and primality checks, parameters
 w.multiplier()       # Knuth–Schroeppel scores for every candidate k; the chosen one
 fb = w.factor_base() # DataFrame: p, sqrt(kn) mod p, both roots, log2 p, byte log, sieved?
