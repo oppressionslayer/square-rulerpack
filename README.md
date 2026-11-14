@@ -7,7 +7,7 @@ at as a DataFrame or a numpy array. Same parameter tables, same Knuth–Schroepp
 same family selection (family *i* picks the same primes for *a* as the Rust engine's family *i*),
 same Gray-code polynomial switching, same Q1/Q2 forms, same exact and plain thresholds, same
 large-prime cycle finder and square root. The sieve kernel is numba when it is installed and
-numpy slices otherwise; relation collection runs across processes.
+numpy slices otherwise; relation collection runs across processes. Very fast. 
 
 ```sh
 pip install square-rulerpack            # from PyPI; add '[fast]' for the numba kernel
@@ -175,12 +175,12 @@ sample 60 digit: 100433627766186892221372630609062766858404681029709092356097
 
 | input | Rust extension | this Python port | `sympy.factorint` |
 |---|---|---|---|
-| 80-digit semiprime 5072…6537 (from an IPython session) | **15.5 s** | an hour-ish | not attempted |
+| 80-digit semiprime 5072…6537 (from an IPython session) | **15.5 s** | <30mins  | not attempted |
 | 40-digit semiprime, two random 20-digit primes | 0.01 s | 0.27 s | 7.8 s |
 | 50-digit semiprime, two random 25-digit primes | 0.06 s | 0.33 s | 8.8 s |
 | 60-digit semiprime, two random 30-digit primes | 0.80 s | 14.8 s | 116.6 s |
 
-using the workers=1 acheive theabove results, the 80 digit cna be down in 19  minutes with more workers.
+using the workers=1 acheive theabove results, the 80 digit can be down in 12  minutes with more workers.
 
 `sympy.factorint` has Pollard rho, p−1 and ECM but no quadratic sieve, so its time grows with the
 size of the *smaller factor*; the sieve's grows with the size of *n* and does not care how the
