@@ -1,0 +1,31 @@
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "square-rulerpack-native"
+version = "0.2.0"
+description = "Lars Rocha's square-rulerpack quadratic sieve (Rust, double large primes, AVX2) compiled as a Python extension: factor 40-100 digit numbers from Python at native speed."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Lars Rocha"}]
+keywords = ["quadratic-sieve", "siqs", "factorization", "number-theory", "rust", "pyo3"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Rust",
+    "Topic :: Scientific/Engineering :: Mathematics",
+]
+
+[project.urls]
+Homepage = "https://github.com/oppressionslayer/square-rulerpack-py"
+"Rust crate" = "https://crates.io/crates/square-rulerpack"
+"Pure Python package" = "https://pypi.org/project/square-rulerpack/"
+
+[tool.maturin]
+module-name = "square_rulerpack_native"
+features = ["pyo3/extension-module"]
+strip = true
