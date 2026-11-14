@@ -33,15 +33,21 @@ pip install square-rulerpack[native]   # For the Rust compiled version, very fas
 
 or
 
-  ┌────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │                command                 │                                                           what you get                                                           │
-  ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ pip install square-rulerpack           │ pure Python package only. sq.HAVE_NATIVE is False, everything runs in Python workers                                             │
-  ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ pip install 'square-rulerpack[fast]'   │ pure Python plus numba, which JIT-compiles the Python sieve kernel. Faster than plain Python, still far slower than Rust         │
-  ├────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-  │ pip install 'square-rulerpack[native]' │ pure Python plus square-rulerpack-native, the compiled Rust engine. This is the one that gives you the 8-minute 100-digit result │
-  ┌────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+pip install "square-rulerpack[native,fast]"   # both: the Rust engine for factoring, numba for the Python Walkthrough
+
+or
+
+  ┌─────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+  │                   command                   │                                                           what you get                                                           │
+  ├─────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ pip install square-rulerpack                │ pure Python package only. sq.HAVE_NATIVE is False, everything runs in Python workers                                             │
+  ├─────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ pip install 'square-rulerpack[fast]'        │ pure Python plus numba, which JIT-compiles the Python sieve kernel. Faster than plain Python, still far slower than Rust         │
+  ├─────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ pip install 'square-rulerpack[native]'      │ pure Python plus square-rulerpack-native, the compiled Rust engine. This is the one that gives you the 8-minute 100-digit result │
+  ├─────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
+  │ pip install "square-rulerpack[native,fast]" │ both extras: the Rust engine for factor_completely, numba for the Python Walkthrough and lessons                                 │
+  └─────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 
 pip install -e .                        # or from this checkout
