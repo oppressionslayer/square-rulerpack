@@ -1,6 +1,29 @@
+# Python
 __pycache__/
+*.py[cod]
 *.egg-info/
+.eggs/
 .pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.ipynb_checkpoints/
+
+# build output: python -m build, maturin build / sdist (-o dist in native/), wheelhouse
 dist/
 build/
+wheelhouse/
+native/dist/
 native/target/
+*.whl
+*.tar.gz
+
+# virtual environments
+.venv/
+venv/
+.spenv/
+
+# editors
+.vscode/
+.idea/
+*.swp
